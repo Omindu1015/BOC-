@@ -23,7 +23,7 @@ def round_rectangle(obj, x1, y1, x2, y2, r=25, **kwargs):
 # --- Canvas-based rounded button ---
 def create_rounded_button(parent, text, command):
     canvas_width = 350
-    canvas_height = 80
+    canvas_height = 140
     canvas = tk.Canvas(parent, width=canvas_width, height=canvas_height, bg='white', highlightthickness=0)
 
     button_shape = round_rectangle(
@@ -39,7 +39,7 @@ def create_rounded_button(parent, text, command):
     button_text = canvas.create_text(
         canvas_width // 2, canvas_height // 2,
         text=text,
-        font=("Arial", 22, "bold"),
+        font=("Arial", 32, "bold"),
         fill="black"
     )
 
@@ -52,7 +52,7 @@ def create_rounded_button(parent, text, command):
 
 # --- Language selection actions ---
 def select_sinhala():
-    messagebox.showinfo("Selected", "ඔබ සිංහල තෝ  රා   ඇත")
+    messagebox.showinfo("Selected", "ඔබ සිංහල තෝ  රා  ඇත")
 
 def select_tamil():
     messagebox.showinfo("Selected", "நீங்கள் தமிழ் தேர்ந்தெடுத்துள்ளீர்கள்")
@@ -98,12 +98,19 @@ left_frame_container = tk.Frame(left_right_container, bg="white")
 left_frame_container.pack(side="left", expand=True, fill="both")
 
 left_frame = tk.Frame(left_frame_container, bg="white")
-left_frame.pack(expand=True)
+left_frame.pack(expand=True, fill="both")
 
-# Add buttons with spaced padding
-create_rounded_button(left_frame, "සිංහල", select_sinhala).pack(pady=(60, 10))
-create_rounded_button(left_frame, "English", select_english).pack(pady=(60, 10))
-create_rounded_button(left_frame, "தமிழ்", select_tamil).pack(pady=(60, 10))
+# Add equal spacers above and below buttons
+tk.Frame(left_frame, height=60, bg="white").pack()
+
+buttons_wrapper = tk.Frame(left_frame, bg="white")
+buttons_wrapper.pack(expand=True)
+
+create_rounded_button(buttons_wrapper, "සිංහල", select_sinhala).pack(pady=(10, 40))
+create_rounded_button(buttons_wrapper, "English", select_english).pack(pady=(10, 40))
+create_rounded_button(buttons_wrapper, "தமிழ்", select_tamil).pack(pady=(10, 10))
+
+tk.Frame(left_frame, height=60, bg="white").pack()
 
 # Separator
 separator = tk.Frame(left_right_container, bg="#808285", width=2, height=700)
@@ -114,17 +121,28 @@ right_frame_container = tk.Frame(left_right_container, bg="white")
 right_frame_container.pack(side="right", expand=True, fill="both")
 
 right_frame = tk.Frame(right_frame_container, bg="white")
-right_frame.pack(expand=True)
+right_frame.pack(expand=True, fill="both")
 
-# Add welcome texts with matching vertical padding
-tk.Label(right_frame, text="ආයුබෝ  වන්", font=("Arial", 28, "bold"), fg="#808285", bg="white").pack(pady=(60, 5))
-tk.Label(right_frame, text="කරුණා  කර ඔබට සේවා  ව ලබා  ගත\n යුතු භා  ෂා  ව තෝ  රන්න", font=("Arial", 14), fg="#808285", bg="white").pack()
+# Top spacer to balance vertical alignment
+tk.Frame(right_frame, height=60, bg="white").pack()
 
-tk.Label(right_frame, text="Welcome", font=("Arial", 28, "bold"), fg="#808285", bg="white").pack(pady=(60, 5))
-tk.Label(right_frame, text="Please select your language\nthat need to get service", font=("Arial", 14), fg="#808285", bg="white").pack()
+# Wrapper for centered welcome texts
+welcome_wrapper = tk.Frame(right_frame, bg="white")
+welcome_wrapper.pack(expand=True)
 
-tk.Label(right_frame, text="வரவேற்பு", font=("Arial", 28, "bold"), fg="#808285", bg="white").pack(pady=(60, 5))
-tk.Label(right_frame, text="உங்கள் மொழியைத்\n தேர்ந்தெடுக்கவும்", font=("Arial", 14), fg="#808285", bg="white").pack()
+# Welcome texts (aligned with buttons)
+tk.Label(welcome_wrapper, text="ආයුබෝ  වන්", font=("Arial", 30, "bold"), fg="#808285", bg="white").pack(pady=(10,5))
+tk.Label(welcome_wrapper, text="කරුණා  කර ඔබට සේවා  ලබා  ගත\nයුතු භා  ෂා  ව තෝ  රන්න", font=("Arial", 15), fg="#808285", bg="white").pack(pady=(0, 40))
+
+tk.Label(welcome_wrapper, text="Welcome", font=("Arial", 30, "bold"), fg="#808285", bg="white").pack(pady=(50, 5))
+tk.Label(welcome_wrapper, text="Please select your language\nthat need to get service", font=("Arial", 15), fg="#808285", bg="white").pack(pady=(0, 40))
+
+tk.Label(welcome_wrapper, text="வரவேற்பு", font=("Arial", 30, "bold"), fg="#808285", bg="white").pack(pady=(60, 5))
+tk.Label(welcome_wrapper, text="உங்கள் மொழியைத்\nதேர்ந்தெடுக்கவும்", font=("Arial", 15), fg="#808285", bg="white").pack(pady=(0, 40))
+
+# Bottom spacer
+tk.Frame(right_frame, height=60, bg="white").pack()
+
 
 # --- Start the application ---
 root.mainloop()
