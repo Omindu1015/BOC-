@@ -20,6 +20,8 @@ def round_rectangle(obj, x1, y1, x2, y2, r=25, **kwargs):
     ]
     return obj.create_polygon(points, **kwargs, smooth=True)
 
+
+
 # --- Canvas-based rounded button ---
 def create_rounded_button(parent, text, command):
     canvas_width = 350
