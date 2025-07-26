@@ -16,7 +16,7 @@ class RestartAppOnChange(FileSystemEventHandler):
             self.process = subprocess.Popen(["python", self.filepath])
 
 if __name__ == "__main__":
-    target_file = "BOC_Queue.py"  # your main GUI script
+    target_file = "Service_selector.py"  # your main GUI script
     handler = RestartAppOnChange(target_file)
     observer = Observer()
     observer.schedule(handler, ".", recursive=False)
