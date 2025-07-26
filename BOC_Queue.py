@@ -5,7 +5,7 @@ from tkinter import messagebox
 
 root = tk.Tk()
 root.title("BOC Queue Management")
-root.geometry("1280x800")
+root.geometry("1280x500")
 root.configure(bg="white")
 
 # Screen scaling factor based on resolution
@@ -15,7 +15,7 @@ screen_height = root.winfo_screenheight()
 font_scale = screen_width / 1920  # assuming base design was for 1920px width
 font_large = int(64 * font_scale)
 font_medium = int(20 * font_scale)
-font_small = int(12 * font_scale)
+font_small = int(15 * font_scale)
 
 
 def on_icon_click(event):
@@ -105,7 +105,7 @@ for i, service in enumerate(services):
     tk.Label(row, text=service, font=("Arial", font_small, "bold"), bg="#d3d3d3").grid(row=0, column=1, padx=10, sticky="w")
     tk.Checkbutton(row, variable=var, bg="#d3d3d3").grid(row=0, column=2, padx=5, sticky="e")
 
-tk.Button(bottom, text="Add / Reorder", font=("Arial", font_small), bg="black", fg="white").grid(row=3, column=0, pady=10)
+tk.Button(bottom, text="Add / Reorder", font=("Arial", font_small), bg="gray", fg="white", relief="solid", bd=1, highlightbackground="black", highlightthickness=1).grid(row=3, column=0, pady=10)
 tk.Frame(bottom, bg="black", height=2).grid(row=4, column=0, sticky="ew", pady=(10, 0))
 
 footer = tk.Frame(bottom, bg="#d3d3d3")
@@ -121,22 +121,25 @@ for i in range(3):
 
 # Button labels and colors
 btn_style = [
-    ("CALL", "#444"), ("SKIP", "red"),
-    ("HOLD", "#fddd00"), ("RECALL", "orange"),
-    ("PROCEED", "#2c57a3")
+    ("CALL", "#444", "white"),
+    ("SKIP", "red", "white"),
+    ("HOLD", "#fddd00", "black"),
+    ("RECALL", "orange", "white"),
+    ("PROCEED", "#2c57a3", "white")
 ]
 
-# Buttons: 3 in first row
-for i, (text, color) in enumerate(btn_style[:3]):
-    tk.Button(middle_panel, text=text, bg=color, fg="white",
-              font=("Arial", font_small, "bold"), width=12, height=2)\
+for i, (text, color, text_color) in enumerate(btn_style[:3]):
+    tk.Button(middle_panel, text=text, bg=color, fg=text_color,
+              font=("Arial", font_small, "bold"), width=12, height=2,
+              relief="solid", bd=1, highlightbackground="black", highlightthickness=1)\
         .grid(row=0, column=i, padx=10, pady=10, sticky="nsew")
 
-# Buttons: 2 in second row (centered under columns 1 and 2)
-for i, (text, color) in enumerate(btn_style[3:]):
-    tk.Button(middle_panel, text=text, bg=color, fg="white",
-              font=("Arial", font_small, "bold"), width=12, height=2)\
-        .grid(row=1, column=i+0, padx=10, pady=10, sticky="nsew")
+for i, (text, color, text_color) in enumerate(btn_style[3:]):
+    tk.Button(middle_panel, text=text, bg=color, fg=text_color,
+              font=("Arial", font_small, "bold"), width=12, height=2,
+              relief="solid", bd=1, highlightbackground="black", highlightthickness=1)\
+        .grid(row=1, column=i, padx=10, pady=10, sticky="nsew")
+
 
 
 
@@ -163,8 +166,8 @@ for i, (icon, label, value) in enumerate(stats_data):
 
 # Display and Settings Buttons with Unicode
 btn_style = [
-    ("Display", "🖥️"),
-    ("Settings", "⚙")
+    ("Display   ", "🖥️"),
+    ("Settings  ", "⚙")
 ]
 
 for i, (text, icon) in enumerate(btn_style):
